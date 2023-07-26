@@ -24,6 +24,12 @@
 ![User Profile](screenshots/user_profile.png)
 ### Student Dashboard
 ![Student Dashboard](screenshots/student_dashboard.png)
+### Student Course Detail
+![Student Course Detail](screenshots/stubent_course_detail.png)
+### Student Obective Test
+![Student Object Test](screenshots/obj_test.png)
+### Student Shop Center
+![Student Shop Center](screenshots/student_shopcenter.png)
 ## FEATURES
 ## SETUP
 ## PACKAGES
