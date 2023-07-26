@@ -1,0 +1,92 @@
+{% extends 'pdf_base.html' %}
+
+{% load student_tags %}
+
+{% block extra_css %}
+  table {
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 3px;
+
+  }
+  caption {
+    text-align: center;
+    font-size: 25px;
+    border: 2px solid #ddd;
+    padding: 3px;
+  }
+  h2 {
+    text-align: center;
+  }
+{% endblock %}
+ 
+{% block content %}
+<!--
+    First name
+    Last name
+    Other name
+    Id
+-->
+<h2>ALHUDA ACADEMY</h2>
+  <table>
+    <caption>Students Data</caption>
+    <thead>
+      <tr>
+        <th>SN</th>
+        {% for field in required_fields %}
+          {% if field == 'reg_id' %}
+            <th>Admission No.</th>
+          {% else %}
+            <th>{{ field|serialize }}</th>
+          {% endif %}
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          {% if 'first_name' in required_fields %}
+            <td>{{ student.user.first_name }}</td>
+          {% endif %}
+          {% if 'last_name' in required_fields %}
+            <td>{{ student.user.last_name }}</td>
+          {% endif %}
+          {% if 'middle_name' in required_fields %}
+           <td>{{ student.user.middle_name }}</td>
+          {% endif %}
+          {% if 'email' in required_fields %}
+            <td>{{ student.user.email }}</td>
+          {% endif %}
+          {% if 'reg_id' in required_fields %}
+            <td>{{ student.user.reg_id }}</td>
+          {% endif %}
+          {% if 'phone_number' in required_fields %}
+            <td>{{ student.phone_number }}</td>
+          {% endif %}
+          {% if 'date_of_birth' in required_fields %}
+            <td>{{ student.date_of_birth }}</td>
+          {% endif %}
+          {% if 'nationality' in required_fields %}
+            <td>{{ student.nationality }}</td>
+          {% endif %}
+          {% if 'state_of_origin' in required_fields %}
+            <td>{{ student.state_of_origin }}</td>
+          {% endif %}
+          {% if 'lga_of_origin' in required_fields %}
+            <td>{{ student.lga_of_origin }}</td>
+          {% endif %}
+          {% if 'address' in required_fields %}
+            <td>{{ student.address }}</td>
+          {% endif %}
+         {# {% if 'date_joined' in required_fields %} #}
+            {# <td>{{ student.date_joined }}</td> #}
+          {# {% endif %} #}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

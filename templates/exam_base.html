@@ -1,0 +1,89 @@
+{% extends 'student_base.html' %}
+
+{% load course course_dashboard %}
+
+{% block title %}
+ Student | Take assessment
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-primary" style="max-width:550px;margin:auto;">
+        <div class="card-body">
+          <ul class="list-group list-group-unboardered">
+            <li class="list-group-item">
+              <h5><b class="mr-2">Student</b> {{ student }}</h5>
+            </li>
+            <li class="list-group-item">
+              <h5><b class="mr-2">Batch</b> {{ batch }}</h5>
+            </li>
+            <li class="list-group-item">
+              <h5><b class="mr-2">Course</b> {{ course }}</h5>
+            </li>
+            {% if module %}
+            <li class="list-group-item">
+              <h5><b class="mr-2">Module</b> {{ module }}</h5>
+            </li>
+            {% endif %}
+            <li class="list-group-item">
+              <h5><b class="mr-2">Instructor</b> {{ course.instructor }}</h5>
+            </li>
+            <li class="list-group-item">
+              <h5><b class="mr-2">Paper({{ paper|model_name }})</b> {{ paper }}</h5>
+            </li>
+            <li class="list-group-item">
+              <h5><b class="mr-2">Total marks</b> {{ paper.total_marks }}</h5>
+            </li>
+            {% if not paper|model_name == 'assignment' %}
+            <li class="list-group-item">
+                <h5><b>Time left</b> <a id="dmin">{{ mins }}</a> mins <a id="dsec">{{ secs }}</a> seconds</h5>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card card-info card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Questions</h3>
+        </div>
+        <div class="card-body">
+          {% block questions %}
+
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra-javascript %}
+<script type="text/javascript">
+      count = 0;
+      $(document).ready(function() {
+          var hidden, visibilityState, visibilityChange;
+
+          });
+      var milisec = 0;
+      var seconds = document.getElementById("secs").value;
+      var minutes = document.getElementById("mins").value
+      function display() {
+          if (minutes == 0 && seconds == 0) {
+              window.onbeforeunload = undefined
+              document.getElementById("examform").submit();
+          }
+          if (seconds == 0) {
+              minutes = minutes - 1
+              seconds = 60
+          }
+          seconds -= 1
+          document.getElementById("dsec").innerHTML = seconds
+          document.getElementById("dmin").innerHTML = minutes
+          setTimeout("display()", 1000)
+      }
+      display()
+  </script>
+{% endblock %}

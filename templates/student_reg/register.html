@@ -1,0 +1,80 @@
+{% extends 'account_base.html' %}
+
+{% load bootstrap4 %}
+
+{% load static %}
+
+{% block title %}
+ New user registration page
+{% endblock %}
+
+{% block extra-stylesheet %}
+ {{ user.form.media.css }}
+ {{ student_form.media.css }}
+{% endblock %}
+
+{% block subtitle %}
+ Create an account
+{% endblock %}
+
+{% block content %}
+ <form action="" method="post" enctype="multipart/form-data"  id="register" onsubmit="process(event)">
+  {% csrf_token %}
+   {% bootstrap_form user_form %}
+   {% bootstrap_form student_form %}
+          <!-- /.col -->
+   {% buttons %}
+   <div class="row">
+    <div class="col-8">
+     <input type="submit" value="Register" class="btn btn-primary btn-block">
+    </div>
+    <div class="col-4">
+     <a href="{% url 'custom_auth:home' %}" class="btn btn-block btn-outline-primary">Cancel</a>
+    </div>
+   </div>
+   {% endbuttons %}
+  </form>
+
+
+     <a href="{% url 'login' %}" class="text-center mb-2">I already have an account</a><br>
+{% endblock %}
+{% block extra-javascript %}
+
+  <script>
+   /* const info = document.querySelector('.phone-info')
+    function process(event) {
+        event.preventDefault();
+        const phoneNumber = input.getNumber();
+
+        info.style.display = "";
+        info.innerHTML = `Phone number is in e.164 format: <strong>${phoneNumber}</strong>`
+    } */
+  $(document).ready(function () {
+   $('#id_email').keyup(function () {
+    $.ajax({
+     data: $(this).serialize(),
+    // type: 'GET',
+     url: "{% url 'student_reg:validate_email' %}",
+     dataType: 'json',
+
+     success: function (data) {
+      if (data.is_taken == true) {
+       $('#id_email').removeClass('is-valid').addClass('is-invalid');
+       $('#id_email').before('<div class="invalid-feedback d-block" id="emailError">This email already exists! please login or try another one.</div>');
+      } else {
+       $('#id_email').removeClass('is-invalid').addClass('is-valid');
+       $('#emailError').remove()
+      }
+     },
+    error: function (data) {
+     console.log(data.responseJSON.errors)
+    },
+    })
+    return false;
+   })
+  })
+ </script>
+
+ {{ user_form.media.js }}
+ {{ student_form.media.js }}
+{% endblock %}

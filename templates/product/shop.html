@@ -1,0 +1,51 @@
+{% extends 'student_base.html' %}
+
+{% load humanize %}
+
+{% block title %}
+ Shop Center
+{% endblock %}
+
+{% block content %}
+  <div class="card card-primary card-outline">
+    <div class="card card-header">
+      <h3 class="card-title">Shop Center</h3>
+    </div>
+    <div class="card-body">
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6">
+        {% for product in products %}
+        <div class="col">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h4 class="card-title">{{ product.title }}</h4>
+            </div>
+            <img class="card-img-top" height="300" width="100" src="{{ product.image.url }}" />
+            <div class="card-body">
+              <span class="card-text text-muted m-1">
+                {% if not product.is_free %}
+                 $ {{ product.price|intcomma }}
+                {% else %}
+                  free
+                {% endif %}
+              </span>
+              <a class="btn btn-info mb-2" href="{% url 'payment:buy_product' product.pk %}">
+                {% if not product.is_free %}
+                  Buy
+                {% else %}
+                  Get product
+                {% endif %}
+              </a>
+              <a class="btn btn-outline-success m-2" href="{% url 'product:product_detail' product.pk %}">More info<i class="fas fa-angle-double-right ml-2"></i></a>
+            </div>
+         </div>
+         </div>
+        {% empty %}
+          <p>No product yet!</p>
+        {% endfor %}
+    </div>
+  </div>
+  <div class="card-footer">
+    <a href="{% url 'product:user_product_index' %}" class="btn btn-primary"><i class="fas fa-user mr-2"></i>My products</a>
+  </div>
+ </div>
+{% endblock %}

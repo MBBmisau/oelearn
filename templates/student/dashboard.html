@@ -1,0 +1,85 @@
+{% extends 'student_base.html' %}
+
+{% block title %}
+ Student | Dashboard
+{% endblock %}
+
+{% block content %}
+ <div class="container">
+  {% include 'dashboard/partials/marquee.html' %}
+   <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5">
+     <div class="col-12 col-sm-12 col-md-6">
+       <div class="small-box bg-success">
+         <div class="inner" style="height:140px;">
+           <h2>My Courses</h2>
+           <p>{{ courses_enrolled_count }}</p>
+         </div>
+         <div class="icon">
+           <i class="fas fa-chalkboard"></i>
+         </div>
+         <a href="{% url 'course:enroll_index' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+       </div>
+      </div>
+      <div class="col">
+       <div class="small-box bg-info">
+         <div class="inner" style="height:140px;">
+           <h2>Register</h2>
+           <p>New Courses</p>
+         </div>
+         <div class="icon">
+           <i class="fas fa-chalkboard"></i>
+         </div>
+         <a href="{% url 'course:nonroll_index' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+       </div>
+      </div>
+      <div class="col">
+       <div class="small-box bg-dark">
+         <div class="inner" style="height:140px;">
+           <h2>My products</h2>
+           <p>{{ my_product_count }}</p>
+         </div>
+         <div class="icon">
+           <i class="fas fa-shopping-cart"></i>
+         </div>
+         <a href="{% url 'product:user_product_index' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+       </div>
+      </div>
+      <div class="col">
+       <div class="small-box bg-primary">
+         <div class="inner" style="height:140px;">
+           <h2>Shop Center</h2>
+           <p></p>
+         </div>
+         <div class="icon">
+           <i class="fas fa-shopping-cart"></i>
+         </div>
+         <a href="{% url 'product:shop' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+       </div>
+      </div>
+      <div class="col">
+        <div class="small-box bg-success">
+          <div class="inner" style="height:140px;">
+            <h2>Result</h2>
+            <p>Check result</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-compass"></i>
+          </div>
+          <a href="{% url 'result:check_result' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+       </div>
+       <div class="col">
+        <div class="small-box bg-secondary">
+          <div class="inner" style="height:140px;">
+            <h2>Certificate</h2>
+            <p>Get certificate</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <a href="{% url 'certificate:index' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+       </div>
+   </div>
+ </div>
+{% endblock %}

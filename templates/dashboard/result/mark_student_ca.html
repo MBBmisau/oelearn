@@ -1,0 +1,105 @@
+{% extends 'teacher_base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+{% if obj.ca %}
+ Mark Results | {{ obj.ca }}
+{% elif obj.exam %}
+  Exam Results | {{ obj.exam }}
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+  <div class="row">
+    {% if parent_url %}
+    <div class="col-12">
+      <a class="btn btn-outline-primary mb-2 btn-lg" href="{{ parent_url }}">
+        <i class="fas fa-angle-double-left"></i>
+      </a>
+    </div>
+    {% endif %}
+    <div class="col-lg-3">
+      <div class="card card-primary card-outline" style="max-width: 550px;">
+        <div class="card-header">
+          <h3 class="card-title">Mark student {% if obj.ca %} CA {% elif obj.exam %} Exam {% endif %} Result</h3>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <tr>
+             <th>Student</th>
+             <td>{{ obj.student }}</td>
+            </tr>
+            {% if obj.ca %}
+            <tr>
+              <th>CA</th>
+              <td>{{ obj.ca }}</td>
+             </tr>
+            {% endif %}
+            {% if obj.exam %}
+            <tr>
+              <th>CA</th>
+              <td>{{ obj.exam }}</td>
+             </tr>
+            {% endif %}
+             <tr>
+              <th>Batch</th>
+              <td>{{ obj.batch }}</td>
+             </tr>
+             {% if obj.module %}
+             <tr>
+              <th>Module</th>
+              <td>{{ obj.module }}</td>
+             </tr>
+             {% endif %}
+             <tr>
+              <th>Course</th>
+              <td>{{ obj.course }}</td>
+             </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Submitted answers</h3>
+          </div>
+          <div class="card-body">
+            <div class="row row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+              {% for form in formset.forms  %}
+                <div class="col">
+                  <div class="card card-info card-outline">
+                    <div class="card-header">
+                      <h3 class="card-title">({{ form.instance.question.question_no }}). {{ form.instance.question.question }}</h3>
+                    </div>
+                    <div class="card-body">
+                      {{ form.id }}
+                      {% if form.errors %}
+                       <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button class="close" type="button" data-dismiss="alert" aria-label="close">&#215;</button>
+                        {% for error in form.non_field_errors %}
+                         {{ error }}{% if not forloop.last %}<br>{% endif %}
+                        {% endfor %}
+                       </div>
+                      {% endif %}
+                        <p class="card-text">{{ form.instance.student_answer }}</p><hr>
+                      <b>Maximum of: <span class="badge badge-primary">{{ form.instance.question.marks }} marks</span></b>
+                      {% render_field form.score class="form-control" %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="card-footer">
+            <input type="submit" value="Submit" class="btn btn-primary btn-lg">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,123 @@
+{% extends 'dashboard_base.html' %}
+
+{% block main-sidebar-content %}
+<li class="nav-item">
+ <a class="nav-link" href="{% url 'dashboard:dashboard' %}">
+ <p><i class="fas fa-tachometer-alt nav-icon"></i>
+  Dashboard</p>
+ </a>
+</li>
+<li class="nav-item">
+ <a class="nav-link" href="#">
+  <p>
+   <i class="fas fa-user nav-icon"></i>Profile
+   <i class="right fas fa-angle-left"></i>
+  </p>
+ </a>
+ <ul class="nav nav-treeview">
+  <li class="nav-item">
+   <a class="nav-link" href="{% url 'dashboard:profile' %}">
+    <i class="fas fa-arrow-circle-right nav-icon"></i>My Profile
+   </a>
+  </li>
+  <li class="nav-item">
+   <a class="nav-link" href="{% url 'password_change' %}">
+    <i class="fas fa-arrow-circle-right nav-icon"></i>Change password
+   </a>
+  </li>
+ </ul>
+ </li>
+ <hr>
+ <li class="nav-item">
+  <a class="nav-link active" href="#">
+   <p>
+    <i class="fas fa-arrow-alt-circle-down nav-icon"></i>Admin
+    <i class="right fas fa-lock"></i>
+   </p>
+ </a>
+ </li>
+
+ {% if user.is_admin %}
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'custom_auth_dashboard:dashboard' %}">
+  <p><i class="fas fa-users-cog nav-icon"></i>
+   Account</p>
+  </a>
+ </li>
+ {% endif %}
+ {% if user.is_admin %}
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'student_dashboard:dashboard' %}">
+  <p><i class="fas fa-user-clock nav-icon"></i>
+   Student</p>
+  </a>
+ </li>
+ {% endif %}
+ {% if user.is_admin %}
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'teacher_dashboard:dashboard' %}">
+  <p><i class="fas fa-user-shield nav-icon"></i>
+   Teacher</p>
+  </a>
+ </li>
+ {% endif %}
+ {% if user.is_admin %}
+ <!--
+ <li class="nav-item">
+  <a class="nav-link" href="#">
+  <p><i class="fas fa-donate nav-icon"></i>
+   Payment</p>
+  </a>
+ </li> -->
+ {% endif %}
+ {% if user.is_admin %}
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'academic_dashboard:dashboard' %}">
+  <p><i class="fas fa-graduation-cap nav-icon"></i>
+   Academic</p>
+  </a>
+ </li>
+ {% endif %}
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'course_dashboard:dashboard' %}">
+  <p><i class="fas fa-chalkboard nav-icon"></i>
+   Course</p>
+  </a>
+ </li>
+ <!--
+ <li class="nav-item">
+  <a class="nav-link" href="#">
+  <p><i class="fas fa-bell nav-icon"></i>
+   Examination</p>
+  </a>
+ </li> -->
+ {% if user.is_admin %}
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'result_dashboard:dashboard' %}">
+  <p><i class="fas fa-compass nav-icon"></i>
+   Result</p>
+  </a>
+ </li>
+ {% endif %}
+ {% if user.is_admin %}
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'certificate_dashboard:dashboard' %}">
+  <p><i class="fas fa-award nav-icon"></i>
+   Certificate</p>
+  </a>
+ </li> 
+ {% endif %}
+ {% if user.is_admin %}
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'product_dashboard:dashboard' %}">
+  <p><i class="fas fa-shopping-cart nav-icon"></i>
+   Shop Center</p>
+  </a>
+ </li> 
+ {% endif %}
+ <li class="nav-item">
+   <a class="nav-link" href="{% url 'logout' %}">
+    <i class="fas fa-sign-out-alt nav-icon"></i>Logout
+   </a>
+  </li>
+{% endblock %}

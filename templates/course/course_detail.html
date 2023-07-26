@@ -1,0 +1,175 @@
+{% extends 'student_base.html' %}
+
+{% load course course_dashboard embed_video_tags %}
+
+{% block title %}
+Student courses | Detail
+{% endblock %}
+
+{% block content %}
+ <div class="row">
+   <div class="col-12">
+     <a class="btn btn-outline-primary mb-2 btn-lg" href="{% url 'course:enroll_index' %}">
+       <i class="fas fa-angle-double-left"></i>
+     </a>
+   </div>
+   <div class="col-md-3">
+     <ul class="list-group">
+       {% for nav_module in course.modules.all %}
+         <a href="{% url 'course:course_detail' nav_module.id %}"
+          class="list-group-item list-group-item-group {% if nav_module == module %} active {% endif %} {% is_eligible user.student nav_module %}">
+           {{ nav_module.sub_title }}<span class="badge bg-success">{{ nav_module.num_contents }}</span>
+         </a>
+       {% endfor %}
+     </ul>
+   </div>
+   <div class="col-md-9">
+     <div class="card card-success card-outline">
+       <div class="card-header">
+         <h2 class="card-title">{{ module.title }}<span class="float-right badge bg-primary">{{ module.sub_title }}</span></h2>
+       </div>
+       <div class="card-body">
+         <div class="row">
+           <div class="col-md-6">
+             <div class="border shadow border-dark rounded p-2 m-2">
+               <h3 class="">Module Info</h3>
+               <ul class="nav flex-column">
+                 <li class="nav-item">
+                   <p class="nav-link m-0">
+                     Course <span class="float-right badge bg-success">{{ module.course }}</span>
+                   </p>
+                  </li>
+                 <li class="nav-item">
+                   <p class="nav-link m-0">
+                     Instructor <span class="float-right badge bg-success">{{ module.course.instructor }}</span>
+                   </p>
+                  </li>
+                 <li class="nav-item">
+                   <p class="nav-link m-0">
+                     Contents <span class="float-right badge bg-success">{{ module.num_contents }}</span>
+                   </p>
+                  </li>
+                 <li class="nav-item">
+                   <p class="nav-link m-0">
+                     Assessments <span class="float-right badge bg-success">{{ module.num_assessments }}</span>
+                   </p>
+                  </li>
+               </ul>
+             </div>
+           </div>
+           <div class="col-md-6">
+             <div class="border shadow border-dark rounded p-2 m-2">
+               <h3 class="">Description</h3>
+              <p>{{ module.description }}</p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-md-6">
+        {% for video in videos %}
+        <div class="card card-success card-outline pb-2">
+          <div class="card-header">
+            <h3 class="card-title">
+              {{ video.title }}
+            </h3>
+          </div>
+           {% if video.is_file %}
+             <video width="100%" height="240" controls controlsList="nodownload">
+              <source src="{{ video.video_file.url }}" type="video/mp4"/>
+              Your browser does not support video!
+             </video>
+           {% elif video.url %}
+             {% video video.url '310x240' %}
+           {% endif %}
+           <div class="crearfix card-body">
+            {% if has_next_module %}
+             <a href="{% url 'course:course_detail' next_module.id %}" class="float-right btn btn-success">Next<i class="fas fa-angle-double-right ml-2"></i></a>
+            {% endif %}
+            {% if has_prev_module %}
+             <a href="{% url 'course:course_detail' prev_module.id %}" class="float-left btn btn-success"><i class="fas fa-angle-double-left mr-2"></i>Previous</a>
+            {% endif %}
+           </div>
+        </div>
+      {% empty %}
+       <p>No Video added yet!</p>
+      {% endfor %}
+         <div class="card card-primary card-outline">
+           <div class="card-header">
+             <h3 class="card-title">Contents<span class="badge bg-primary">{{ module.num_contents }}</span></h3>
+           </div>
+           <div class="card-body">
+               <div class="border border-dark shadow rounded p-2 m-2">
+                 <div class="row row-cols-sm-2 row-cols-md-3">
+                   {% for image in images %}
+                     <img src="{{ image.image.url }}" alt="" height="200">
+                   {% empty %}
+                    <p>No Image added yet!</p>
+                   {% endfor %}
+                 </div>
+               </div><hr>
+             {% for file in files %}
+              <div class="border border-primary shadow rounded p-2 m-2">
+                <h4 class="card-subtitle">{{ file }}<span class="badge bg-primary text-sm">{{ file|model_name }}</span></h4
+                <small class="text-muted">
+                Size: <span class="badge bg-primary text-sm">{{ file.size|filesizeformat }}</span> |
+                Format: <span class="badge bg-primary text-sm">{{ file.format }}</span>
+                </small>
+                <a href="{{ file.file.url }}" class="btn btn-sm btn-outline-primary ml-2">Download<i class="fas fa-download ml-2"></i></a>
+              </div>
+             {% empty %}
+              <p>No file added yet!</p>
+             {% endfor %}
+             <hr>
+             {% for text in texts %}
+             <div class="border border-info rounded p-2 m-2">
+               <h4>{{ text.title }}</h4>
+               <p>{{ text.content }}</p>
+             </div>
+             {% empty %}
+              <p>No text added yet!</p>
+             {% endfor %}
+           </div> 
+           <div class="crearfix card-footer">
+            {% if has_next_module %}
+             <a href="{% url 'course:course_detail' next_module.id %}" class="float-right btn btn-success">Next<i class="fas fa-angle-double-right ml-2"></i></a>
+            {% endif %}
+            {% if has_prev_module %}
+             <a href="{% url 'course:course_detail' prev_module.id %}" class="float-left btn btn-success"><i class="fas fa-angle-double-left mr-2"></i>Previous</a>
+            {% endif %}
+           </div>
+         </div>
+       </div>
+       <div class="col-md-6">
+         <div class="card card-success card-outline">
+           <div class="card-header">
+             <h3 class="card-title">Assessments<span class="badge bg-success">{{ module.num_assessments }}</span></h3>
+           </div>
+           <div class="card-body">
+             <div class="border shadow border-dark rounded p-2 m-2 bg-warning text-light">
+               <p><b>Note:</b> Objective and Essay tests are only attempted once. Please! make sure you are ready before you attempt any of them.</p>
+             </div>
+             {% for ca in assessments %}
+              <div class="border border-success shadow rounded p-2 m-2">
+                {% with paper=ca.paper %}
+                   <h4 class="card-subtitle">{{ paper }} <span class="badge bg-success text-sm">{{ paper|model_name }}</span></h4>
+                   Total marks<span class="badge bg-success">{{ paper.total_marks }}</span>
+                   Questions<span class="badge bg-success">{{ paper.num_questions }}</span><br>
+                   {% if paper|model_name == 'objective' or paper|model_name == 'essay' %}
+                    <small class="text-muted">Start: {{ paper.start_time }} - End: {{ paper.end_time }}</small><br>
+                   {% endif %}
+                   <a class="btn btn-sm btn-outline-success text-success m-1" href="{% url 'exam:take_ca' ca.id module.id paper|model_name paper.pk %}">
+                     <i class="fas fa-edit mr-2"></i>Take Assessment</a>
+                {% endwith %}
+              </div>
+             {% empty %}
+              <p>No assessment added yet!</p>
+             {% endfor %}
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+{% endblock %}

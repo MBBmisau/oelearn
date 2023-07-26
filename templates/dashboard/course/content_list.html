@@ -1,0 +1,154 @@
+{% extends 'teacher_base.html' %}
+
+{% load course_dashboard %}
+
+{% block title %}
+Course | Module Contents
+{% endblock %}
+
+{% block content %}
+ <div class="row">
+   <div class="col-12">
+     <div class="d-flex justify-content-between">
+      <a class="btn btn-outline-primary mb-2 btn-lg" href="{% url 'course_dashboard:dashboard' %}">
+        <i class="fas fa-angle-double-left"></i> </a>
+        <h2>{{ course.title }}</h2>
+     </div>
+   </div>
+   <div class="col-md-3">
+     <ul class="list-group">
+       {% for nav_module in course.modules.all %}
+         <a href="{% url 'course_dashboard:content_list' nav_module.id %}" class="list-group-item list-group-item-group {% if nav_module == module %} active {% endif %}">
+           {{ nav_module.sub_title }}<span class="badge bg-success">{{ nav_module.num_contents }}</span>
+         </a>
+       {% endfor %}
+     </ul>
+   </div>
+   <div class="col-md-9">
+     <div class="card card-success card-outline">
+       <div class="card-header">
+         <h2 class="card-title">{{ module.title }}<span class="float-right badge bg-primary">{{ module.sub_title }}</span></h2>
+       </div>
+       <div class="card-body">
+         <div class="row">
+           <div class="col-md-6">
+             <div class="border border-dark shadow rounded p-2 m-2">
+               <h3 class="">Add new content:</h3>
+              <ul class="list-unstyled list-inline p-0 m-0">
+               <li class="list-inline-item p-1">
+                 <a class="btn btn-outline-primary text-primary" href="{% url 'course_dashboard:add_content' module.id 'text' %}">Text</a>
+               </li>
+               <li class="list-inline-item p-1">
+                 <a class="btn btn-outline-primary text-primary" href="{% url 'course_dashboard:add_content' module.id 'image' %}">Image</a>
+               </li>
+               <li class="list-inline-item p-1">
+                 <a class="btn btn-outline-primary text-primary" href="{% url 'course_dashboard:add_content' module.id 'video' %}">Video</a>
+               </li>
+               <li class="list-inline-item p-1">
+                 <a class="btn btn-outline-primary text-primary" href="{% url 'course_dashboard:add_content' module.id 'file' %}">File</a>
+               </li>
+              </ul>
+             </div>
+           </div>
+           <div class="col-md-6">
+             <div class="border border-dark shadow rounded p-2 m-2">
+               <h3 class="">Add new assessment:</h3>
+              <ul class="list-unstyled list-inline p-0 m-0">
+               <li class="list-inline-item p-1">
+                 <a class="btn btn-outline-primary text-success" href="{% url 'exam_dashboard:add_ca' module.id 'objective' %}">Objective Test</a>
+               </li>
+               <li class="list-inline-item p-1">
+                 <a class="btn btn-outline-primary text-success" href="{% url 'exam_dashboard:add_ca' module.id 'essay' %}">Essay Test</a>
+               </li>
+               <li class="list-inline-item p-1">
+                 <a class="btn btn-outline-primary text-success" href="{% url 'exam_dashboard:add_ca' module.id 'assignment' %}">Assignment</a>
+               </li>
+              </ul>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-md-6">
+         <div class="card card-primary card-outline">
+           <div class="card-header">
+             <h3 class="card-title">Contents<span class="badge bg-primary">{{ module.num_contents }}</span></h3>
+           </div>
+           <div class="card-body">
+             {% for content in module.contents.all %}
+              <div class="border border-primary shadow rounded p-2 m-2">
+                {% with item=content.item %}
+                   <h4 class="card-subtitle">{{ item }}<span class="badge bg-primary text-sm">{{ item|model_name }}</span></h4>
+                   {% if item|model_name == 'file' %}
+                    <small class="text-muted">
+                      Size: <span class="badge bg-primary text-sm">{{ item.size|filesizeformat }}</span> |
+                      Format: <span class="badge bg-primary text-sm">{{ item.format }}</span>
+                    </small><br>
+                   {% endif %}
+                   <span class="text-muted small">Status: 
+                    {% if content.live %}
+                     <span class="badge bg-success">Live</span>
+                     <a href="{% url 'course_dashboard:publish_toggle' 'content' content.pk %}" class="btn btn-primary btn-sm">Unpublish</a>
+                    {% else %}
+                     <span class="badge bg-info">Draft</span>
+                     <a href="{% url 'course_dashboard:publish_toggle' 'content' content.pk %}" class="btn btn-success btn-sm">Publish</a>
+                    {% endif %}
+                  </span>
+                   <a class="btn btn-outline-primary text-primary btn-sm m-1" href="{% url 'course_dashboard:edit_content' module.id item|model_name item.id %}">
+                     <i class="fas fa-edit mr-2"></i>Edit</a>
+                   <a class="btn btn-outline-primary text-danger btn-sm m-1" href="{% url 'course_dashboard:delete_content' content.id %}">
+                     <i class="fas fa-trash mr-2"></i>Delete</a>
+                {% endwith %}
+              </div>
+             {% empty %}
+              <p>No content added yet!</p>
+             {% endfor %}
+           </div>
+         </div>
+       </div>
+       <div class="col-md-6">
+         <div class="card card-success card-outline">
+           <div class="card-header">
+             <h3 class="card-title">Assessments<span class="badge bg-success">{{ module.num_assessments }}</span></h3>
+           </div>
+           <div class="card-body">
+             {% for ca in module.assessments.all %}
+              <div class="border border-success shadow rounded p-2 m-2">
+                {% with paper=ca.paper %}
+                   <h4 class="card-subtitle">{{ paper }} <span class="badge bg-success text-sm">{{ paper|model_name }}</span></h4>
+                   Total marks<span class="badge bg-success">{{ paper.total_marks }}</span>
+                   Questions<span class="badge bg-success">{{ paper.num_questions }}</span><br>
+                   {% if paper|model_name == 'objective' or paper|model_name == 'essay' %}
+                    <small class="text-muted">Start: {{ paper.start_time }} - End: {{ paper.end_time }}</small><br>
+                   {% endif %}
+                   <p class="text-muted small p-0 m-0">Status: 
+                    {% if ca.live %}
+                     <span class="badge bg-success">Live</span>
+                     <a href="{% url 'course_dashboard:publish_toggle' 'ca' ca.pk %}" class="btn btn-primary btn-sm">Unpublish</a>
+                    {% else %}
+                     <span class="badge bg-info">Draft</span>
+                     <a href="{% url 'course_dashboard:publish_toggle' 'ca' ca.pk %}" class="btn btn-success btn-sm">Publish</a>
+                    {% endif %}
+                    <a href="{% url 'result_dashboard:module_ca_result' module.id ca.id %}" class="btn btn-success btn-sm">
+                      <i class="fas fa-check mr-2"></i>Mark results <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                  </p>
+                   <a class="btn btn-sm btn-outline-success text-success m-1" href="{% url 'exam_dashboard:edit_ca_question' module.id paper|model_name paper.id %}">
+                     <i class="fas fa-edit mr-2"></i>Add Question</a>
+                   <a class="btn btn-sm btn-outline-success text-success m-1" href="{% url 'exam_dashboard:edit_ca' module.id paper|model_name paper.id %}">
+                     <i class="fas fa-edit mr-2"></i>Edit</a>
+                   <a class="btn btn-sm btn-outline-success text-danger m-1" href="{% url 'exam_dashboard:delete_ca' ca.id %}">
+                     <i class="fas fa-trash mr-2"></i>Delete</a>
+                {% endwith %}
+              </div>
+             {% empty %}
+              <p>No assessment added yet!</p>
+             {% endfor %}
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+{% endblock %}

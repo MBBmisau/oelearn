@@ -1,0 +1,31 @@
+{% extends 'student_base.html' %}
+
+{% block title %}
+ User Product Detail
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-4" style="max-width:210px;">
+      <div class="card card-success">
+        <div class="card-header">
+          <h4 class="card-title">{{ product.title }}</h4>
+        </div>
+        <img class="card-img-top" height="300" width="120" src="{{ product.image.url }}" />
+        <div class="card-body">
+         {% if product.downloadable %}
+          <a class="btn btn-outline-success" href="{{ product.file.url }}">Download<i class="fas fa-downlod ml-2"></i></a>
+         {% endif %}
+        </div>
+         </div>
+    </div>
+    <div class="col-md-6 col-md-4">
+     <div class="border border-success p-2 m-2">
+      <h3>Description</h3>
+       <p>{{ product.description }}</p>
+     </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

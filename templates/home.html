@@ -1,0 +1,378 @@
+{% load static %}
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Alhuda academy </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+	<!-- CSS here -->
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/gijgo.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/animate.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/magnific-popup.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/fontawesome-all.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/themify-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/slick.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/nice-select.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+</head>
+<body>
+    <!--? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'home/img/logo/loder.png' %}" alt="logo">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+        <div class="header-area">
+            <div class="main-header ">
+                <div class="header-top d-none d-lg-block">
+                    <!-- Left Social -->
+                    <div class="header-left-social">
+                        <ul class="header-social">    
+                            <li><a href="https://www.facebook.com/AlhudaGlobalAcademy?mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a  href="http://api.whatsapp.com/send?phone=+2348069962902"><i class="fab fa-whatsapp text-success"></i></a></li>
+                            <li><a href="https://youtube.com/@AlhudaInstitudeNg" class="text-danger"><i class="fab fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="container">
+                        <div class="col-xl-12">
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="header-info-left">
+                                    <ul>     
+                                        <li>+2348069962902</li>
+                                    </ul>
+                                </div>
+                                <div class="header-info-right">
+                                    <ul>    
+                                        <li><a href="{% url 'login' %}"><i class="ti-user"></i>Login</a></li>
+                                        <li><a href="{% url 'student_reg:register' %}"><i class="ti-lock"></i>Register</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-bottom header-sticky">
+                    <!-- Logo -->
+                    <div class="logo d-none d-lg-block">
+                        <a href="#"><img src="{% static 'home/img/logo/alhuda-logo.jpg' %}" alt=""></a>
+                    </div>
+                    <div class="container">
+                        <div class="menu-wrapper">
+                            <!-- Logo -->
+                            <div class="logo logo2 d-block d-lg-none">
+                                <a href="#"><img src="{% static 'home/img/logo/alhuda-logo.jpg' %}" alt=""></a>
+                            </div>
+                            <!-- Main-menu -->
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">                                                                                          
+                                        <li><a href="{% url 'login' %}"><i class="ti-user"></i>Login</a></li>
+                                        <li><a href="{% url 'student_reg:register' %}"><i class="ti-lock"></i>Register</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    <main>
+        <!--? slider Area Start-->
+        <div class="slider-area ">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-6 col-lg-7 col-md-8">
+                                <div class="hero__caption">
+                                    <span data-animation="fadeInLeft" data-delay=".2s">Popular Online Courses</span>
+                                    <h1 data-animation="fadeInLeft" data-delay=".4s">The New Way To Learn Properly in With Alhuda Academy!</h1>
+                                    <!-- Hero-btn -->
+                                    <div class="hero__btn">
+                                        <a href="{% url 'student_reg:register' %}" class="btn hero-btn"  data-animation="fadeInLeft" data-delay=".8s">Register</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-5">
+                                <div class="hero-man d-none d-lg-block f-right" data-animation="jello" data-delay=".4s">
+                                    <img src="{% static 'home/img/a3.png' %}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Slider -->
+                <div class="single-slider slider-height d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-6 col-lg-7 col-md-8">
+                                <div class="hero__caption">
+                                    <span data-animation="fadeInLeft" data-delay=".2s">Popular Online Courses</span>
+                                    <h1 data-animation="fadeInLeft" data-delay=".4s">The New Way To Learn Properly in With Alhuda Academy!</h1>
+                                    <!-- Hero-btn -->
+                                    <div class="hero__btn">
+                                        <a href="{% url 'student_reg:register' %}" class="btn hero-btn"  data-animation="fadeInLeft" data-delay=".8s">Get Started</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-5">
+                                <div class="hero-man d-none d-lg-block f-right" data-animation="jello" data-delay=".4s">
+                                    <img src="{% static 'home/img/a3.png' %}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- slider Area End-->
+        <!--? Categories Area Start -->
+        <div class="categories-area section-padding30">
+            <div class="container">
+                <div class="row justify-content-sm-center">
+                    <div class="cl-xl-7 col-lg-8 col-md-10">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle text-center mb-70">
+                            <span>Popular Online Courses</span>
+                            <h2>Lets Browse All Catagories</h2>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-cat mb-50">
+                            <div class="cat-icon">
+                                <span class="fas fa-star"></span>
+                            </div>
+                            <div class="cat-cap">
+                                <h5><a  href="#">Luga</a></h5>
+                                <p>Learn arabic language and arabic grammar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+                <!-- Section Button -->
+            </div>
+        </div>
+        <!-- Categories Area End -->
+        <!--? Count Down Start -->
+        <div class="count-down-area pt-90 pb-60 section-bg" data-background="home/img/section_bg01.png">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="count-down-wrapper" >
+                            <div class="row justify-content-center">
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <!-- Counter Up -->
+                                    <div class="single-counter text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="72px" height="71px">
+                                             <image  x="0px" y="0px" width="72px" height="71px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABHCAMAAACTZfGgAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACvlBMVEX///8tmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhctmhf////Z9I0RAAAA6HRSTlMAALv77U7Cw9xSvDlMUGXKT1MeBO5aEf3YVB/vqSMCAxI4Lof3EMfXuqcKVoNFLGjIUQ8NXXBsZMyWGqYVKi2EDkFtAS86NjNA8x3njJoUQ18IoGvkzWmkcmNg36uvwLRKF/6bJbnGfRvpsPWtZ4shdOwMNPQJxDH5Sc6Bar+jwSLL1tOyJpN30fwLtzwyWBiXgHqClTtX8jVEQhzUeFwpE52KtVvqlHF2IBaz8cXwKDfgYX7biIXJpTDdBtIH2Yn45q5I3nt8Sz2xeXPjz5j64Z7aK1Xihpz2n+Wiqrgkb5lHGai96Kx1fW7M+gAAAAFiS0dEAIgFHUgAAAAHdElNRQfkBQUMHhhwCNKbAAAEtklEQVRYw+2Y+1dUVRTHOYSAolgwiAQCQgiITigakAQiMChkIK8B8hEkSAQU6PhCI95vzCwVhDQFo0yzDALzUWlKb+mhmVr2/v4ZnXPnDjOXmXPvlKxWq+X3h9l7zrrnc89j7zP7jI2NKNt7ICe7ScSibMwE2DtwZe8ITLYWNIXIyIkOaqqVIHs50DQ4T8e91oEc5ED3wcVVZWl2fx/kRma4W5idBdBMeZAHIfd7ms/OHDTTSxFEZpnPzhxk1tfbx1sv1zEQ8TWbnTlotp/0CX9jMD4QQDzgpG+eM252FtYoUApyC7IVFRQ8l4Rg3nwm9YOgyy4PCpVbowWm6bLwDrY/bNHih/QKj4DLHYBMFImHJwa05L8KinrEGlB0zFIFUKw7VMvi+KD4BI1Gk7h8BZIUQMl4lB6pKx/jgFIMoZIq7PkqqcKMoHikEe/0DGRyQFnQZufkPo7V1PczP7jXjIEiEMX8teCAcuGx7om8fDxJ/fUFhfZSFW7Qg4qILyKF0ame4oBSMbkYcH+6RHbXkkgpyp6h7rNw44IS6KjV5Q6yoAqSQedZsJG4byLcqS0nREewmfpbtkoXaNEYiCRgw7YSYDsqeaAdcNxZ/FyV4D9fXRNoVE1tihFUB2rrG4B6HmhLhvByz0aZqQWjHk2C11zND0ifChovuha5FNHmt6KNOWVoV0yRjsxdXNALEAfkCX6u6RbPq9xd+eIegA96CdjB7Mto4IP2iju0j6X2/s5Yibo6XUTQAWa7MYMPckbPKwcP1eJV6mvMU6SaAQ5Dy4waRwgflIvevqO5oBlJyKHSxtckyu6fz7q24nVm3qjSyIBS0RUOZHoek9k1vGn6jQtqIzHHyYlCFglvnWxvT2yvGMdxQzYzvW/7yoHeQYcPe2kV/TipX5dT40AqxDHzrrDUXFC4uKoMtLRnYHDQ3z9aymnDoLBCQjryQUVex0PnhL63zoMf18hjZgjDsiBF6XCamffF4P7noAF2zhAyCTnyoKTizNozZ7qn7OVwziJZsOcQIA9yFhebVbgBp84flup8ShiaI2jlvl8IffntF0o70+03lRf5QAV8uOAj/YrLBuSFMVDcrEQ/qdoX6vJXtgz0AReVI1s/orXcTasTbgEpSqBcfakoRFvUso/7TXQpnZYD3mglXX1bLxMlkDMutY2MjGAnsXCMsF8yaGmzhiiCQsQ+n7BnhjtHTNSpZm0X7YBmV2XQqqxPG/v7Gz+LJhx9js1HJqTQqvqCBvdEgOgRsvpfqyGDrAR9qQT6SjtkjbQqhYI9sxlW6kqALOiu7ur/JWDUyeQrLSRCaRp83SO5sH3TcILdaS5LsvfbAtr23dUDYs9rDkCZEXSwCd+vue71A8pjjV2yaZU/dMMWuGmslnbdAo6lBTvCeB/5sRUFYaI/FfhJx57ryEeWoc9tNG1kNu8ozhkuhPEq7GGlls3P5bg6NoxB2G1jNmA39iUa3tiN278wZzgCowZkDtDL7Nl0YJqY/RWtuLXeQOoATv+aVgcEGQ+tuUPAbzeGIgCTC0Xb70i+eb1kE2rUxmOkDHC4JpKKYq7QlbMNkfxpc+EP2rYiUvLvS8ufgbRxemmc6Xk0exT4C5sHAOBlXXP3AAAAAElFTkSuQmCC" />
+                                        </svg>
+                                        <span class="counter color-green">{{ course_count }}</span>
+                                        <p class="color-green">+ Courses</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <!-- Counter Up -->
+                                    <div class="single-counter text-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="72px" height="69px">
+                                            <image  x="0px" y="0px" width="72px" height="69px"  xlink:href="data:img/png;base64,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" />
+                                        </svg>
+                                        <span class="counter color-red">{{ student_count }}</span>
+                                        <p class="color-red">+ Students</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Count Down End -->
+        <!--? Popular Course Start -->
+        <div class="popular-course section-padding30">
+            <div class="container">
+                <div class="row justify-content-sm-center">
+                    <div class="cl-xl-7 col-lg-8 col-md-10">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle text-center mb-70">
+                            <span>Most Popular Course Of This Week</span>
+                            <h2>Our Popular Course</h2>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <!-- Single course -->
+                        <div class="single-course mb-40">
+                            <div class="course-img">
+                                <img src="{% static 'home/img/a2.jpg' %}" alt="">
+                            </div>
+                            <div class="course-caption">
+                                <div class="course-cap-top">
+                                    <h4><a href="#">Hada baqi</a></h4>
+                                </div>
+                                <div class="course-cap-bottom d-flex justify-content-between">
+                                    <ul>
+                                        <li><i class="ti-user"></i></li>
+                                    </ul>
+                                    <span>2,000 Naira</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                <!-- Section Button -->
+                
+            </div>
+        </div>
+        <!-- Popular Course End -->
+    
+    </main>
+    <footer>
+        <!--? Footer Start-->
+        <div class="footer-area footer-bg">
+            <div class="container">
+                <div class="footer-top footer-padding">
+                    <!-- footer Heading -->
+                    <div class="footer-heading">
+                        <div class="row justify-content-between">
+                            <div class="col-xl-5 col-lg-5">
+                                <div class="footer-tittle2">
+                                    <h4>Let’s Get Social</h4>
+                                </div>
+                                <!-- Footer Social -->
+                                <div class="footer-social">
+                                    <a href="https://www.facebook.com/AlhudaGlobalAcademy?mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a>
+                                    <a  href="http://api.whatsapp.com/send?phone=+2348069962902" class="bg-success"><i class="fab fa-whatsapp text-light"></i></a>
+                                    <a href="https://youtube.com/@AlhudaInstitudeNg" class="bg-danger"><i class="fab fa-youtube"></i></a>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer Menu -->
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Contact Us</h4>
+                                    <ul>
+                                        <li><p class="text-muted">+2348069962902</p></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Address</h4>
+                                    <ul>
+                                        <li><p class="text-muted">Munincipal Area Kano State Nigeria</p></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4></h4>
+                                    <ul>
+                                      <li><a href="{% url 'login' %}"><i class="ti-user"></i>Login</a></li>
+                                      <li><a href="{% url 'student_reg:register' %}"><i class="ti-lock"></i>Register</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Bottom -->
+                <div class="footer-bottom">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-lg-12">
+                            <div class="footer-copy-right text-center">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+     Alhuda Academy | This template is made by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+    <!-- Scroll Up -->
+    <div id="back-top" >
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <!-- JS here -->
+
+    <script src="{% static 'home/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static 'home/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static 'home/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'home/js/slick.min.js' %}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static 'home/js/wow.min.js' %}"></script>
+    <script src="{% static 'home/js/animated.headline.js' %}"></script>
+    <script src="{% static 'home/js/jquery.magnific-popup.js' %}"></script>
+    
+    <!-- Date Picker -->
+    <script src="{% static 'home/js/gijgo.min.js' %}"></script>
+    <!-- Nice-select, sticky -->
+    <script src="{% static 'home/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.sticky.js' %}"></script>
+
+    <!-- counter , waypoint -->
+    <script src="{% static 'home/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'home/js/waypoints.min.js' %}"></script>
+
+    <!-- contact js -->
+    <script src="{% static 'home/js/contact.js' %}"></script>
+    <script src="{% static 'home/js/jquery.form.js' %}"></script>
+    <script src="{% static 'home/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'home/js/mail-script.js' %}"></script>
+    <script src="{% static 'home/js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->	
+    <script src="{% static 'home/js/plugins.js' %}"></script>
+    <script src="{% static 'home/js/main.js' %}"></script>
+    
+    </body>
+</html>

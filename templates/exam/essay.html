@@ -1,0 +1,16 @@
+{% extends 'exam_base.html' %}
+
+{% block questions %}
+  <form method="post" id="examform">
+    {% csrf_token %}
+    <ol>
+      {% for ques in questions %}
+      <li><p>{{ ques.question }}</p></li>
+          <textarea class="form-control" id="optionA" name="{{ ques.question }}" rows="5" cols="50"></textarea><br>
+      {% endfor %}
+    </ol>
+    <input type="hidden" id="secs" value="{{ secs }}">
+    <input type="hidden" id="mins" value="{{ mins }}">
+    <input type="submit" value="Submit" id="PaperSubmit" onclick="submitFormOkay = true;" class = "btn" style="border-color:#745959; color:#745959;"/>
+  </form>
+{% endblock %}

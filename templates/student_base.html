@@ -1,0 +1,67 @@
+{% extends 'dashboard_base.html' %}
+
+{% block main-sidebar-content %}
+<li class="nav-item">
+ <a class="nav-link" href="#">
+  <p>
+   <i class="fas fa-user nav-icon"></i>Profile
+   <i class="right fas fa-angle-left"></i>
+  </p>
+ </a>
+ <ul class="nav nav-treeview">
+  <li class="nav-item">
+   <a class="nav-link" href="{% url 'student:profile' %}">
+    <i class="fas fa-arrow-circle-right nav-icon"></i>My Profile
+   </a>
+  </li>
+  <li class="nav-item">
+   <a class="nav-link" href="{% url 'password_change' %}">
+    <i class="fas fa-arrow-circle-right nav-icon"></i>Change password
+   </a>
+  </li>
+ </ul>
+ </li>
+ <hr> -
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'student:dashboard' %}">
+  <p><i class="fas fa-tachometer-alt nav-icon"></i>
+   Dashboard</p>
+  </a>
+ </li>
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'course:enroll_index' %}">
+  <p><i class="fas fa-user-clock nav-icon"></i>
+   Course</p>
+  </a>
+ </li>
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'product:user_product_index' %}">
+  <p><i class="fas fa-shopping-cart nav-icon"></i>
+   Shop Center</p>
+  </a>
+ </li>
+ <!--
+ <li class="nav-item">
+  <a class="nav-link" href="#">
+  <p><i class="fas fa-donate nav-icon"></i>
+   Payment</p>
+  </a>
+ </li> -->
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'result:check_result' %}">
+  <p><i class="fas fa-compass nav-icon"></i>
+   Result</p>
+  </a>
+ </li>
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'certificate:index' %}">
+  <p><i class="fas fa-certificate nav-icon"></i>
+   Certificate</p>
+  </a>
+ </li>
+ <li class="nav-item">
+   <a class="nav-link" href="{% url 'logout' %}">
+    <i class="fas fa-sign-out-alt nav-icon"></i>Logout
+   </a>
+  </li>
+{% endblock %}

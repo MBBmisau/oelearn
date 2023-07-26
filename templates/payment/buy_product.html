@@ -1,0 +1,42 @@
+{% extends 'student_base.html' %}
+
+{% load paystack humanize %}
+
+{% block title %}
+  Product order | Payment
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="card card-primary card-outline" style="max-width:500px;margin:auto;">
+    <div class="card-header">
+      <h3 class="card-title">Invoice Breakdown</h3>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <tr>
+          <th>Order ID</th>
+          <td>{{ order.order_id }}</td>
+        </tr>
+        <tr>
+          <th>Reference</th>
+          <td>{{ ref }}</td>
+        </tr>
+        <tr>
+          <th>User</th>
+          <td>{{ order.user }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ order.user.email }}</td>
+        </tr>
+        <tr>
+          <th>Amount</th>
+          <td>{{ order.amount|intcomma }} Naira</td>
+        </tr>
+      </table>
+      {% paystack_button amount=order.amount email=order.user.email button_class="btn btn-block btn-outline-primary btn-lg mt-4" ref=ref %}
+    </div>
+  </div>
+</div>
+{% endblock %}

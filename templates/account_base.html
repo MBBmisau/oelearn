@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+   {% block title %}
+   {% endblock %}
+  </title>
+    
+  <link rel="shortcut icon" type="image/ico" href="{% static 'img/favicon.ico' %}" >
+
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+
+  {% block extra-stylesheet %}
+  {% endblock %}
+
+    <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+
+</head>
+<body class="hold-transition login-page">
+
+{% block messages %}
+ {% if messages %}
+  {% for message in messages %}
+  <div class="alert {% if message.tags == 'error' %} alert-danger {% else %} alert-{{message.tags}} {% endif %} alert-dismissible">
+   <button class="close" data-dismiss="alert" type="button">&times;
+            </button>
+   <p><strong>{{message.tags}}! </strong> {{ message}} </p>
+  </div>
+  {% endfor %}
+ {% endif %}
+{% endblock %}
+
+<div class="login-box" style="max-width:600px; margin:auto;">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="#" class="h1">Online English Learning School</a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">
+       {% block subtitle %}
+       {% endblock %}
+      </p>
+       {% block content %}
+       {% endblock %}
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+</body>
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+
+{% block extra-javascript %}
+{% endblock %}
+</html>

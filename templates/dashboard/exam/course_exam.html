@@ -1,0 +1,105 @@
+{% extends 'teacher_base.html' %}
+
+{% load course_dashboard %}
+
+{% block title %}
+ Exam | Dashboard
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="row row-cols-1 row-cols-md-2">
+          <div class="col">
+            <div class="border border-primary shadow p-1 m-1">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                  <h3 class="card-title">{{ course }} | Manage exams</h3>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-subtitle"><b>instructor: </b>{{ course.instructor }}</h6>
+                  <h6 class="card-text"><b>Status: </b>
+                    {% if course.live %}
+                     <span class="badge bg-success">Live</span>
+                    {% else %}
+                     <span class="badge bg-info">Draft</span>
+                    {% endif %}
+                  </h6>
+                  <h6><b>Exam status:</b> 
+                    {% if course.exam_open %}
+                     <span class="badge bg-success">Opened</span>
+                     <a href="{% url 'exam_dashboard:exam_status_toggle' course.id %}" class="btn btn-info"><i class="fas fa-times"></i> Close now</a>
+                    {% else %}
+                     <span class="badge bg-info">Closed</span>
+                     <a href="{% url 'exam_dashboard:exam_status_toggle' course.id %}" class="btn btn-success"><i class="fas fa-check"></i> Open now</a>
+                    {% endif %}
+                  </h6>
+                  <h6 class="card-text"><b>Student</b> <span class="badge bg-info">{{ course.num_students }}</span></h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="border border-dark shadow rounded p-2 m-2">
+                <h3 class="">Add new exam:</h3>
+               <ul class="list-unstyled list-inline p-0 m-0">
+                <li class="list-inline-item p-1">
+                  <a class="btn btn-outline-primary text-success" href="{% url 'exam_dashboard:add_exam' course.id 'objective' %}">Objective Test</a>
+                </li>
+                <li class="list-inline-item p-1">
+                  <a class="btn btn-outline-primary text-success" href="{% url 'exam_dashboard:add_exam' course.id 'essay' %}">Essay Test</a>
+                </li>
+               </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card card-success card-outline">
+          <div class="card-header">
+            <h3 class="card-title">{{ live_exam_count }} out of {{ exams_count }} are published</h3>
+          </div>
+          <div class="card-body">
+            <div class="row row-cols-1 row-cols-md-2">
+              {% for exam in exams %}
+               <div class="col">
+                <div class="border border-success shadow rounded p-2 m-2">
+                    {% with paper=exam.paper %}
+                       <h4 class="card-subtitle">{{ paper }} <span class="badge bg-success text-sm">{{ paper|model_name }}</span></h4>
+                       Total marks<span class="badge bg-success">{{ paper.total_marks }}</span>
+                       Questions<span class="badge bg-success">{{ paper.num_questions }}</span><br>
+                       {% if paper|model_name == 'objective' or paper|model_name == 'essay' %}
+                        <small class="text-muted">Start: {{ paper.start_time }} - End: {{ paper.end_time }}</small><br>
+                       {% endif %}
+                       <p class="text-muted small p-0 m-0">Status: 
+                        {% if exam.live %}
+                         <span class="badge bg-success">Live</span>
+                         <a href="{% url 'course_dashboard:publish_toggle' 'exam' exam.pk %}" class="btn btn-primary btn-sm">Unpublish</a>
+                        {% else %}
+                         <span class="badge bg-info">Draft</span>
+                         <a href="{% url 'course_dashboard:publish_toggle' 'exam' exam.pk %}" class="btn btn-success btn-sm">Publish</a>
+                        {% endif %}
+                        <a href="{% url 'result_dashboard:course_exam_result' course.id exam.id %}" class="btn btn-success btn-sm">
+                          <i class="fas fa-check mr-2"></i>Mark results <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                      </p>
+                       <a class="btn btn-sm btn-outline-success text-success m-1" href="{% url 'exam_dashboard:edit_exam_question' course.id paper|model_name paper.id %}">
+                         <i class="fas fa-edit mr-2"></i>Add Question</a>
+                       <a class="btn btn-sm btn-outline-success text-success m-1" href="{% url 'exam_dashboard:edit_exam' course.id paper|model_name paper.id %}">
+                         <i class="fas fa-edit mr-2"></i>Edit</a>
+                       <a class="btn btn-sm btn-outline-success text-danger m-1" href="{% url 'exam_dashboard:delete_exam' exam.id %}">
+                         <i class="fas fa-trash mr-2"></i>Delete</a>
+                    {% endwith %}
+                  </div>  
+               </div>
+              {% empty %}
+                <p>No exam added yet</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'teacher_base.html' %}
+
+{% load django_tables2 %}
+
+{% block title %}
+ Course | Cerficate
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item"><h4><b>Batch:</b> {{ batch }}</h4></li>
+          <li class="list-group-item"><h4><b>Course:</b> {{ course }}</h4></li>
+        </ul>
+        {% include 'dashboard/certificate/partials/navigation.html' %}
+      </div>
+      <div class="col-md-8">
+        {% render_table table %}
+    </div>
+    </div>
+  </div>
+{% endblock content %}

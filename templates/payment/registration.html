@@ -1,0 +1,54 @@
+{% extends 'student_base.html' %}
+
+{% load paystack humanize %}
+
+{% block title %}
+  Invoice | Payment
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="card card-primary card-outline" style="max-width:500px;margin:auto;">
+    <div class="card-header">
+      <h3 class="card-title">Invoice Breakdown</h3>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <tr>
+          <th>Invoice ID</th>
+          <td>{{ invoice.invoice_id }}</td>
+        </tr>
+        <tr>
+          <th>Reference</th>
+          <td>{{ ref }}</td>
+        </tr>
+        <tr>
+          <th>Batch</th>
+          <td>{{ invoice.batch }}</td>
+        </tr>
+        <tr>
+          <th>Course</th>
+          <td>{{ invoice.course }}</td>
+        </tr>
+        <tr>
+          <th>Plan</th>
+          <td>{{ context_plan }}</td>
+        </tr>
+        <tr>
+          <th>Student</th>
+          <td>{{ invoice.student }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ invoice.student.user.email }}</td>
+        </tr>
+        <tr>
+          <th>Amount</th>
+          <td>{{ amount|intcomma }} Naira</td>
+        </tr>
+      </table>
+      {% paystack_button amount=amount email=invoice.student.user.email button_class="btn btn-block btn-outline-primary btn-lg mt-4" ref=ref %}
+    </div>
+  </div>
+</div>
+{% endblock %}

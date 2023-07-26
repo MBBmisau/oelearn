@@ -1,0 +1,78 @@
+{% extends 'teacher_base.html' %}
+
+{% load bootstrap4 %}
+
+{% load static %}
+
+{% block title %}
+Teacher | Registration
+{% endblock %}
+
+{% block extra-stylesheet %}
+ {{ user.form.media.css }}
+ {{ teacher_form.media.css }}
+{% endblock %}
+
+{% block subtitle %}
+ Create an account
+{% endblock %}
+
+{% block content %}
+ <div class="card card-outline card-primary" style="width:500px;margin:auto;">
+   <div class="card-header">
+     <h3 class="card-title">Create new teacher</h3>
+   </div>
+   <div class="card-body">
+     <form action="" method="post" enctype="multipart/form-data"  id="register" onsubmit="process(event)">
+      {% csrf_token %}
+       {% bootstrap_form user_form %}
+       {% bootstrap_form teacher_form %}
+              <!-- /.col -->
+       {% buttons %}
+        <input type="submit" value="Register" class="btn btn-primary btn-block">
+       {% endbuttons %}
+      </form>
+   </div>
+ </div>
+{% endblock %}
+
+{% block extra-javascript %}
+
+  <script>
+   /* const info = document.querySelector('.phone-info')
+    function process(event) {
+        event.preventDefault();
+        const phoneNumber = input.getNumber();
+
+        info.style.display = "";
+        info.innerHTML = `Phone number is in e.164 format: <strong>${phoneNumber}</strong>`
+    } */
+  $(document).ready(function () {
+   $('#id_email').keyup(function () {
+    $.ajax({
+     data: $(this).serialize(),
+    // type: 'GET',
+     url: "{% url 'student_reg:validate_email' %}",
+     dataType: 'json',
+
+     success: function (data) {
+      if (data.is_taken == true) {
+       $('#id_email').removeClass('is-valid').addClass('is-invalid');
+       $('#id_email').before('<div class="invalid-feedback d-block" id="emailError">This email already exists! please login or try another one.</div>');
+      } else {
+       $('#id_email').removeClass('is-invalid').addClass('is-valid');
+       $('#emailError').remove()
+      }
+     },
+    error: function (data) {
+     console.log(data.responseJSON.errors)
+    },
+    })
+    return false;
+   })
+  })
+ </script>
+
+ {{ user_form.media.js }}
+ {{ teacher_form.media.js }}
+{% endblock %}

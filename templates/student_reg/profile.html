@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+ {{ user.username }} profile 
+{% endblock %}
+
+{% block content %}
+ <div class="row">
+  <div class="col-md-6">
+   <div class="card card-primary card-outline">
+    <div class="card-body box-profile">
+     <div class="text-center">
+      {% if user.profile.picture %}
+      <img class="profile-user-img img-fluid img-circle" src="{{ user.profile.picture.url }}" alt="User profile picture">
+      {% else %}
+      <img class="profile-user-img img-fluid img-circle" src="{% static 'img/default.jpg' %}" alt="User profile picture">
+      {% endif %}
+     </div>
+     <p class="text-muted text-center mb-0 mt-2"><b>{{ user.username }}</b></p>
+     <h3 class="profile-username text-center">{{ user.get_full_name }}</h3>
+     <ul class="list-group list-group-unbordered mb-3">
+      <li class="list-group-item">
+       <b>Shops</b> <a class="float-right">3</a>
+      </li>
+    </ul>
+    <a href="{% url 'customer:profile_update' %}" class="btn btn-primary btn-block"><b>Update profile</b></a>
+   </div>
+   <!-- /.card-body -->
+  </div>
+  </div>
+  <div class="col-md-6">
+   <div class="card card-primary">
+    <div class="card-header">
+     <h3 class="card-title">More info</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+    <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
+    <p class="text-muted">
+     {{ user.email }}
+    </p>
+    <hr>
+    {% if profile.alternate_email %}
+    <strong><i class="fas fa-envelope mr-1"></i> Alternate Email</strong>
+    <p class="text-muted">{{ profile.alternate_email }}</p>
+    <hr>
+    {% endif %}
+    <strong><i class="fas fa-phone mr-1"></i> Phone number</strong>
+    <p class="text-muted">
+     {{ profile.phone_number }}
+    </p>
+    <hr>
+    {% if profile.alternate_phone_number %}
+    <strong><i class="fas fa-phone-alt mr-1"></i> Alternate phone number</strong>
+    <p class="text-muted">
+     {{ profile.alternate_phone_number }}
+    </p>
+    <hr>
+    {% endif %}
+    <strong><i class="fas fa-flag mr-1"></i> Nationality</strong>
+    <p class="text-muted">
+     {{ profile.nationality }}
+    </p>
+    <hr>
+    <strong><i class="fas fa-map-marker mr-1"></i> State</strong>
+    <p class="text-muted">
+     {{ profile.state }}
+    </p>
+    <hr>
+    <strong><i class="fas fa-map-marker-alt mr-1"></i> L G A</strong>
+    <p class="text-muted">
+     {{ profile.local_government_area }}
+    </p>
+    <hr>
+    <strong><i class="fas fa-map-marker-alt mr-1"></i> Address</strong>
+    <p class="text-muted">
+     {{ profile.address }}
+    </p>
+    
+    <div class="card-footer">
+     <a href="{% url 'customer:profile_update' %}" class="btn btn-primary btn-block">Update profile</a>
+    </div>
+    
+   </div>
+  </div>
+  </div>
+ </div>
+{% endblock %}

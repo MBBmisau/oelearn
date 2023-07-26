@@ -1,0 +1,20 @@
+{% extends "teacher_base.html" %}
+
+{% block title %}
+ Account | Dashboard
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+      <div class="col">
+        <div class="border border-primary shadow rounded p-2 m-2">
+          <h3>{{ user_count }} total users</h3>
+          <a href="{% url 'custom_auth_dashboard:user_password_reset' %}" class="mt-3 btn btn-outline-primary btn-ld">
+            <i class="fas fa-user-shield mr-2"></i>Change User password
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

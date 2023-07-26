@@ -1,0 +1,36 @@
+{% extends 'teacher_base.html' %}
+
+{% block title %}
+  Current about to be graduated
+{% endblock title %}
+
+{% block content %}
+  <div class="card card-primary card-outline" style="max-width: 550px;margin:auto;">
+    <div class="card-header">
+      <h3 class="card-title">{{ current_batch }} about to be graduated!</h3>
+    </div>
+    <div class="card-body">
+      <h5><b>Current Batch</b> {{ current_batch }}</h5>
+      <h5><b>Next Batch</b> {{ next_batch }}</h5>
+      <p>In the process of batch graduation, the following changes occur.</p>
+      <div class="list-group">
+        <div class="list-group-item">
+          <h5>Student will be graduated their course</h5>
+          <p class="mb-1">
+            Students in any course, published or draft, free or paid would be removed.
+          </p>
+        </div>
+        <div class="list-group-item">
+         <h5>Current academic batch will be changed to next batch</h5>
+         <p class="mb-1">
+          This marked the end of <b>{{ current_batch }}</b>
+         </p>
+        </div>
+        <form action="" method="post">
+         {% csrf_token %}
+         <input type="submit" value="Graduate batch" class="btn btn-success btn-lg btn-block">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

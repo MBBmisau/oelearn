@@ -1,0 +1,47 @@
+{% extends 'teacher_base.html' %}
+
+{% load static %}
+
+{% block title %}
+ Detail | {{ object.user.get_full_name }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6 col-lg-4">
+   <div class="card card-primary card-outline">
+    {% include 'dashboard/teacher/partials/head_info.html' %}
+   <div class="card-footer">
+    <a href="{% url 'student_dashboard:edit_student' object.pk %}" class="btn btn-primary btn-block"><b><i class="fas fa-edit mr-1"></i>Edit</b></a>
+   </div>
+  </div>
+  </div>
+  <div class="col-md-6 col-lg-4">
+   <div class="card card-primary">
+    <div class="card-header">
+     <h3 class="card-title">Personal info</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      {% include 'dashboard/teacher/partials/user_info.html' %}
+    <hr>
+    </div>
+   </div>
+  </div>
+
+   <div class="col-md-6 col-lg-4">
+    <div class="card card-primary">
+    <div class="card-header">
+     <h3 class="card-title">Address info</h3>
+    </div>
+    <div class="card-body">
+      {% include 'dashboard/teacher/partials/profile_info.html' %}
+    <div class="card-footer">
+     <a href="{% url 'student_dashboard:edit_student' object.pk %}" class="btn btn-primary btn-block"><i class="fas fa-edit mr-1"></i>Edit</a>
+    </div>
+    </div>
+   </div>
+  </div>
+
+ </div>  <!-- /.row -->
+{% endblock %}

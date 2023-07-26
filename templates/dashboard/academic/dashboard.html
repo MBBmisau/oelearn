@@ -1,0 +1,48 @@
+{% extends 'teacher_base.html' %}
+
+{% load django_tables2 %}
+
+{% block title %}
+ Academic | Dashboard
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+         <div class="card card-success card-outline">
+           <div class="card-header">
+             <h2 class="card-title">
+               <i class="fas fa-graduation-cap mr-3"></i> Current batch
+             </h2>
+           </div>
+           {% if current_batch %}
+           <div class="card-body">
+            <div class="border border-success radius shadow text-center p-2">
+             <h3 style="text-shadow: 1px 2px;font-weight: bold;">{{ current_batch }}</h3>
+            </div>
+             <h4 class="py-2"><b>Status:</b>
+             {% if current_batch.live %}
+              <span class="badge bg-success">Opened</span>
+              <a href="{% url 'academic_dashboard:batch_status_toggle' %}" class="btn btn-info"><i class="fas fa-times"></i> Close now</a>
+             {% else %}
+              <span class="badge bg-info">Closed</span>
+              <a href="{% url 'academic_dashboard:batch_status_toggle' %}" class="btn btn-success"><i class="fas fa-check"></i> Open now</a>
+             {% endif %}
+            </h4>
+            <a href="{% url 'academic_dashboard:graduate_batch' %}" class="btn btn-lg btn-outline-primary btn-block">
+                Graduate batch <i class="fas fa-arrow-circle-right ml-3"></i>
+            </a>
+           </div>
+           {% endif %}
+           <div class="card-footer">
+            <a href="{% url 'academic_dashboard:create_batch' %}" class="btn btn-success btn-block"><i class="fas fa-plus mr-2"></i> Add new batch</a>
+           </div>
+         </div>
+      </div>
+      <div class="col-md-7">
+        {% render_table table %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'teacher_base.html' %}
+
+{% block title %}
+ Certificate | Dashboard
+{% endblock title %}
+
+{% block content %}
+<div class="card card-primary card-outline" style="max-width: 550px;margin:auto;">
+    <div class="card-header">
+      <h2 class="card-title">Cerficate Dashboard</h2>
+    </div>
+    <div class="card-body p-4">
+      {% include 'dashboard/certificate/partials/navigation.html' %}
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'teacher_base.html' %}
+
+{% block title %}
+Student | Dashboard
+{% endblock %}
+
+{% load django_tables2 %}
+
+{% block content %}
+ <div class="row">
+   <div class="col-lg-3">
+    <div class="border border-primary shadow p-2 m-2">
+      <a href="{% url 'student_dashboard:create_student' %}" class="btn btn-primary btn-block mt-2"><i class="fas fa-plus mr-3"></i>Add New Student</a>
+      <a href="{% url 'student_dashboard:get_student' %}" class="btn btn-success btn-block mt-2"><i class="fas fa-search mr-3"></i>Check Student</a>
+      <a href="{% url 'student_dashboard:download_form' %}" class="btn btn-primary btn-block mt-2"><i class="fas fa-download mr-3"></i>Download data</a>
+    </div>
+   </div>
+    <div class="col-lg-9">
+      {% render_table table %}
+    </div>
+  </div>
+{% endblock %}

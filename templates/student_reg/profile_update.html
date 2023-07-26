@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+ Update {{ user.username }} profile 
+{% endblock %}
+
+{% block content %}
+ <div class="row">
+  <div class="col-md-6">
+   <div class="card card-primary card-outline">
+    <div class="card-body box-profile">
+     <div class="text-center">
+      {% if user.profile.picture %}
+      <img class="profile-user-img img-fluid img-circle" src="{{ user.profile.picture.url }}" alt="User profile picture">
+      {% else %}
+      <img class="profile-user-img img-fluid img-circle" src="{% static 'img/default.jpg' %}" alt="User profile picture">
+      {% endif %}
+     </div>
+    <form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+     <div class="form-group mt-3">
+     <!-- <label for="customFile">Custom File</label> -->
+     <div class="custom-file">
+      {% render_field p_form.picture class="custom-file-input" id="customFile" %}
+      <label class="custom-file-label" for="p_form.picture.id_for_label">Choose Picture</label>
+      </div>
+      </div>
+      <div class="form-group">
+      </div>
+      <input type="submit" class="btn btn-primary btn-block" name="" id="" value="Update my picture" />
+     </form>
+     <hr>
+     <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
+    <p class="text-muted">
+     {{ user.email }}
+    </p>
+    <hr>
+    <strong><i class="fas fa-user mr-1"></i> Username</strong>
+    <p class="text-muted">
+     {{ user.username }}
+    </p>
+    <hr>
+   </div>
+   <!-- /.card-body -->
+  </div>
+  </div><!-- /.col-md-6 -->
+
+  <div class="col-md-6">
+   <div class="card card-primary">
+    <div class="card-header">
+     <h3 class="card-title">Profile</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+    <form action="" method="post">
+     {% csrf_token %}    
+     
+     <div class="form-group">
+      <label for="u_form.first_name.id_for_label">First name</label>
+      {% render_field u_form.first_name class="form-control" value=user.first_name %}
+    </div>
+    <div class="form-group">
+      <label for="u_form.last_name.id_for_label">Last name</label>
+      {% render_field u_form.last_name class="form-control" value=user.last_name %}
+    </div>
+    <div class="form-group">
+      <label for="p_form.alternate_email.id_for_label">Alternate email</label>
+      {% render_field p_form.alternate_email class="form-control" value=profile.alternate_email %}
+    </div>
+    <div class="form-group">
+      <label for="p_form.phone_number.id_for_label">phone number</label>
+      {% render_field p_form.phone_number class="form-control" value=profile.phone_number %}
+    </div>
+    <div class="form-group">
+      <label for="p_form.alternate_phone_number.id_for_label">Alternate phone number</label>
+      {% render_field p_form.alternate_phone_number class="form-control" value=profile.alternate_phone_number %}
+    </div>
+    <div class="form-group">
+      <label for="p_form.nationality.id_for_label">Nationality</label>
+      {% render_field p_form.nationality class="form-control" value=profile.nationality %}
+    </div>
+    <div class="form-group">
+      <label for="p_form.state .id_for_label">State</label>
+      {% render_field p_form.state class="form-control" value=profile.state %}
+    </div>
+    <div class="form-group">
+      <label for="p_form.local_government_area.id_for_label">Local Government Area</label>
+      {% render_field p_form.local_government_area class="form-control" value=profile.local_government_area %}
+    </div>
+    <div class="form-group">
+      <label for="p_form.address.id_for_label">Address</label>
+      {% render_field p_form.address class="form-control" value=profile.address %}
+    </div>
+     
+   </div><!-- /.card-body -->
+    <div class="card-footer">
+     <input type="submit" class="btn btn-primary" name="" id="" value="Save changes" />
+    </div>
+    </form>
+        
+   </div><!-- /.card -->
+  </div><!-- /.col-md-6 -->
+ </div><!-- /.row -->
+ {% endblock %}
+  {% block extra_javascript %}
+  <script src="{% static 'plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
+  {% endblock %}
+  
+  {% block written_script %}
+  <script>
+   $(function () {
+    bsCustomFileInput.init();
+   });
+  </script>
+  {% endblock %}

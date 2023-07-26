@@ -1,0 +1,46 @@
+{% extends 'student_base.html' %}
+
+{% load humanize %}
+
+{% block title %}
+ User Product Detail
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-4">
+      <div class="card card-success" style="max-width:210px;">
+        <div class="card-header">
+          <h4 class="card-title">{{ product.title }}</h4>
+        </div>
+        <img class="card-img-top" height="350" width="140" src="{{ product.image.url }}" />
+        <div class="card-body">
+         {% if product.downloadable %}
+          <span class="card-text text-muted m-0">
+                {% if not product.is_free %}
+                 $ {{ product.price|intcomma }}
+                {% else %}
+                  free
+                {% endif %}
+              </span>
+              <a class="btn btn-info mt-2" href="{% url 'payment:buy_product' product.pk %}">
+                {% if not product.is_free %}
+                  Buy
+                {% else %}
+                  Get product
+                {% endif %}
+              </a>
+         {% endif %}
+        </div>
+    </div>
+    </div>
+    <div class="col-md-6 col-md-4">
+     <div class="border border-success p-2 m-2">
+      <h3>Description</h3>
+       <p>{{ product.description }}</p>
+     </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

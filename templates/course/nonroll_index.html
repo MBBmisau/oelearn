@@ -1,0 +1,73 @@
+{% extends 'student_base.html' %}
+
+{% load course humanize %}
+
+{% block title %}
+ Student courses | Index
+{% endblock %}
+
+{% block content %}
+
+   <div class="card-footer">
+           <a href="{% url 'course:enroll_index' %}" class="btn btn-primary">My courses</a>
+           </div>
+  <div class="card card-primary card-outline">
+    <div class="card-header">
+      <h3 class="card-title">Courses</h3>
+    </div>
+    <div class="card-body">
+      <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        {% for nonroll in non_enrolled_courses %}
+        <div class="col">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h4 class="card-title">{{ nonroll.title }}<span class="badge bg-danger">{{ nonroll.num_modules }} modules</span></h4>
+            </div>
+          <div class="card-body">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <p class="nav-link m-0">
+                    Subject<span class="badge bg-primary float-right">{{ nonroll.subject }}</span>
+                  </p>
+                 </li>
+                <li class="nav-item">
+                  <p class="nav-link m-0">
+                    Instructor: <span class="badge bg-primary float-right">{{ nonroll.instructor }}</span>
+                  </p>
+                 </li>
+                <li class="nav-item">
+                  <p class="nav-link m-0">
+                    Price: 
+                    {% if nonroll.is_free %}
+                    <span class="badge bg-success float-right">free</span>
+                    {% else %}
+                     <span class="badge bg-primary float-right">{{ nonroll.price|intcomma }}</span>
+                    {% endif %}
+                  </p>
+                 </li>
+                <li class="nav-item">
+                  <p class="nav-link m-0">
+                    Certificate:
+                    {% if nonroll.is_certificate_free %}
+                    <span class="badge bg-success float-right">free</span>
+                    {% else %}
+                    <span class="badge bg-primary float-right">{{ nonroll.certificate_price|intcomma }}</span>
+                    {% endif %}
+                  </p>
+                 </li>
+                <li class="nav-item">
+                  <a href="{% url 'payment:course_enrollment' nonroll.id %}" class="nav-link btn btn-outline-primary btn-lg">
+                    Enroll now<i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                 </li>
+              </ul>
+            </div>
+        </div>
+        </div>
+        {% empty %}
+          <p>No course to register!</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

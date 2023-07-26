@@ -1,0 +1,14 @@
+{% load static %}
+
+<div class="card-body box-profile">
+    <div class="text-center">
+     {% if object.passport %}
+     <img class="profile-user-img img-fluid img-circle" src="{{ object.passport.url }}" alt="User profile picture">
+     {% else %}
+     <img class="profile-user-img img-fluid img-circle" src="{% static 'img/default.jpg' %}" alt="User profile picture">
+     {% endif %}
+    </div>
+    <p class="text-muted text-center mb-0 mt-2"><b>{{ object.user.reg_id }}</b></p>
+    <p class="text-muted text-center mb-0 mt-2"><i class="fas fa-envelope mr-2"></i><b>{{ object.user.email }}</b></p>
+    <h3 class="profile-username text-center">{{ object.user.get_full_name }}</h3>
+  </div>

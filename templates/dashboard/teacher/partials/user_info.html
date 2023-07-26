@@ -1,0 +1,25 @@
+
+<strong><i class="fas fa-user mr-1"></i> First name</strong>
+<p class="text-muted">
+ {{ object.user.first_name }}
+</p>
+<hr>
+<strong><i class="fas fa-user mr-1"></i>Last name</strong>
+<p class="text-muted">
+ {{ object.user.last_name }}
+</p>
+<hr>
+{% if object.user.middle_name %}
+<strong><i class="fas fa-user mr-1"></i>Middle name</strong>
+<p class="text-muted">{{ object.user.middle_name }}</p>
+<hr>
+{% endif %}
+{% if object.date_of_birth %}
+<strong><i class="fas fa-calendar mr-1"></i>Date of birth</strong>
+<p class="text-muted">{{ object.date_of_birth }}</p>
+<hr>
+{% endif %}
+<strong><i class="fas fa-user mr-1"></i>Gender</strong>
+<p class="text-muted">
+ {{ object.user.gender }}
+</p>

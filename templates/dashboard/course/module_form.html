@@ -1,0 +1,90 @@
+{% extends 'teacher_base.html' %}
+
+{% load static widget_tweaks %}
+
+{% block title %}
+Course | Manage modules
+{% endblock %}
+
+{% block extra-stylesheet %}
+ <style>
+    .form-input-width {
+        width: 250px;
+    }
+    .form-input-width-sm {
+        width: 100px;
+    }
+ </style>
+{% endblock %}
+
+{% block content %}
+<div>
+    <a class="btn btn-outline-primary mb-2 btn-lg" href="{% url 'course_dashboard:dashboard' %}">
+      <i class="fas fa-angle-double-left"></i>
+    </a>
+  </div>
+<form id="myForm" method="post" action="">
+    {% csrf_token %}
+    <div class="card card-primary">
+        <div class="card-header">
+         <h3 class="card-title">{{ course }} | Modules management</h3>
+        </div>
+        <div class="card-body table table-responsive p-0">
+          <table style="table-layout: fixed;width:950px">
+            <thead>
+             <th class="form-input-width">Title</th>
+             <th class="form-input-width"> Sub title</th>
+             <th class="form-input-width-sm">Order</th>
+             <th class="form-input-width-sm">Is live</th>
+             <th class="form-input-width">Description</th>
+            </thead>
+            <tbody>
+             {% for form in formset.forms %}
+             {% if form.errors %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+               <button class="close" type="button" data-dismiss="alert" aria-label="close">&#215;</button>
+                {% for error in form.non_field_errors %}
+                 {{ error }}{% if not forloop.last %}<br>{% endif %}
+                {% endfor %}
+              </div>
+             {% endif %}
+               <tr id="{{ form.prefix }}-row">
+                <td class="form-input-width">
+                    {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+                    {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                    {{ form.title | add_class:"form-control" }}
+                </td>
+                <td>{{ form.sub_title | add_class:"form-control" }}</td>
+                <td>{{ form.order | add_class:"form-control" }}</td>
+                <td>{{ form.live | add_class:"form-control" }}</td>
+                <td>{% render_field form.description class="form-control" rows="5" %}</td>
+               </tr>
+             {% endfor %}
+             {{ formset.management_form }}
+            </tbody>
+          </table>
+
+    
+        </div>
+        <div class="card-footer">
+         <input type="submit" value="Save Changes" class="btn btn-lg btn-primary">
+        </div>
+    </div>    
+</form>
+{% endblock content %}
+
+{% block extra-javascript %}
+<script type="text/javascript" src="{% static 'js/jquery-1.3.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#myForm tbody tr').formset({
+            prefix: '{{ formset.prefix }}',
+            deleteText: "<div class='btn btn-danger btn-circle mt-2'><i class='fas fa-trash'> Delete</i></div>",
+            addText: "<div class='btn btn-success btn-circle'><i class='fas fa-plus'> Add more</i></div>",
+        });
+    })
+</script>
+{% endblock %}
+
+

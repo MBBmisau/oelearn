@@ -1,0 +1,69 @@
+{% extends 'student_base.html' %}
+
+{% block title %}
+  Certificate | Dashboard
+{% endblock  %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-3">
+      <a href="{% url 'certificate:get_certificate' %}" class="btn btn-outline-primary btn-lg">
+        <i class="fas fa-award mr-2"></i> Get certificate</a>
+    </div>
+    <div class="col-md-9">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+        {% for cert in certificates %}
+          <div class="col">
+            <div class="card card-success card-outline">
+              <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-certificate mr-3"></i> Certificate</h2>
+              </div>
+              <div class="card-title">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                      <p class="nav-link m-0">
+                        Course<span class="badge bg-primary float-right">{{ cert.result.course }}</span>
+                      </p>
+                     </li>
+                    <li class="nav-item">
+                      <p class="nav-link m-0">
+                        Batch<span class="badge bg-primary float-right">{{ cert.result.batch }}</span>
+                      </p>
+                     </li>
+                    <li class="nav-item">
+                      <p class="nav-link m-0">
+                        CA score<span class="badge bg-primary float-right">{{ cert.result.total_ca_score }}</span>
+                      </p>
+                     </li>
+                     <li class="nav-item">
+                      <p class="nav-link m-0">
+                       Exam score<span class="badge bg-primary float-right">{{ cert.result.total_exam_score }}</span>
+                      </p>
+                     </li>
+                     <li class="nav-item">
+                       <p class="nav-link m-0">
+                        Total score<span class="badge bg-primary float-right">{{ cert.result.total_score }}</span>
+                       </p>
+                     </li>
+                    {% if cert.is_bound %}
+                     <li class="nav-item">
+                      <a href="{{ cert.file.url }}" class="nav-link btn btn-outline-success btn-lg">
+                        Download<i class="fas fa-download ml-3"></i>
+                      </a>
+                     </li>
+                     {% else %}
+                     <li class="nav-item">
+                        <div class="shadow radius border border-info text-center p-2">
+                          Processing...
+                        </div>
+                      </li>
+                     {% endif %}
+                  </ul>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

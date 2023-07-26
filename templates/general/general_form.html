@@ -1,0 +1,46 @@
+{% extends 'teacher_base.html' %}
+
+{% block title %}
+ {{ title }}
+{% endblock %}
+
+{% load bootstrap4 %}
+
+{% block extra-stylesheet %}
+ {{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+  {% if parent_url %}
+  <div class="col-12">
+    <a class="btn btn-outline-primary mb-2 btn-lg" href="{{ parent_url }}">
+      <i class="fas fa-angle-double-left"></i>
+    </a>
+  </div>
+  {% endif %}
+<div class="col-sm-10 col-md-8 col-lg-6" style="margin:auto;">
+ <div class="card" >
+  <div class="card-header">
+   <h2 class="card-title">{{ title }}</h2>
+  </div>
+  <div class="card-body">
+   <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+     {% buttons %}
+      <input class="btn btn-secondary btn-block mb-2" type="submit" name="submit" id="submit" value="{% if button_value %} {{ button_value }} {% else %} Save {% endif %}" />
+     {% endbuttons %}
+   </form>
+  </div>
+ </div>
+</div>
+
+</div><!-- row -->
+</div>
+{% endblock %}
+
+{% block extra-javascript %}
+ {{ form.media.js }}
+{% endblock %}

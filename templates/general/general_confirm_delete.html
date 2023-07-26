@@ -1,0 +1,31 @@
+{% extends 'teacher_base.html' %}
+
+{% block title %}
+{{ object}} about to be
+  deleted!
+{% endblock title %}
+
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-8 col-md-6 col-lg-4" style="margin:auto;">
+      <div class="card">
+        <div class="card-body">
+          <p class="text-info">Are you sure you want to delete object <strong>{{ object}}</strong><br />
+            This action will delete the object permanently and perhaps, all objects attached.</p>
+          <div class="mt-2 text-danger">This action cannot be Undone</div>
+
+          <form method="POST" class="mt-3">
+            {% csrf_token %}
+
+            <button type="submit" class="btn btn-primary">
+              Confirm Delete
+              <i class="fa fa-trash-alt"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends 'teacher_base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+ Certificate | Update
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+ <div class="col-md-4">
+   {% include 'dashboard/certificate/partials/navigation.html' %}
+ </div>
+ <div class="col-md-4">
+    <div class="card card-primary card-outline" style="max-width: 550px;margin:auto;">
+        <div class="card-header">
+          <h2 class="card-title">Certificate Update</h2>
+        </div>
+        <div class="card-body p-4">
+          <ul class="list-group">
+            <div class="list-group-item">
+             <h5>Student</h5>
+             <p class="mb-1">{{ object.result.student }}</p>
+            </div>
+            <div class="list-group-item">
+              <h5>Course</h5>
+              <p class="mb-1">{{ object.result.course }}</p>
+            </div>
+            <div class="list-group-item">
+             <h5>Batch</h5>
+             <p class="mb-1">{{ object.result.batch }}</p>
+            </div>
+            <div class="list-group-item">
+             <h5>CA Score</h5>
+             <p class="mb-1">{{ object.result.total_ca_score }}</p>
+            </div>
+            <div class="list-group-item">
+             <h5>Exam Score</h5>
+             <p class="mb-1">{{ object.result.total_exam_score }}</p>
+            </div>
+            <div class="list-group-item">
+             <h5>Total Score</h5>
+             <p class="mb-1">{{ object.result.total_score }}</p>
+            </div>
+          </ul>
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+             {% buttons %}
+              <input class="btn btn-primary btn-block btn-lg mb-2" type="submit" name="submit" id="submit" value="Upload file" />
+             {% endbuttons %}
+           </form>
+        </div>
+      </div>
+</div>
+</div>
+{% endblock content %}

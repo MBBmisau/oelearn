@@ -1,0 +1,58 @@
+{% extends 'dashboard_base.html' %}
+
+{% load static %}
+
+{% block title %}
+ {{ meta_title }}
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="{% url 'custom_auth:home' %}" class="btn btn-block btn-primary"><i class="fas fa-home mr-3"></i>Home</a>
+        <a href="{% url 'login' %}" class="btn btn-block btn-primary"><i class="fas fa-lock mr-3"></i>Login</a>
+        <a href="{% url 'result:verify_result' %}" class="btn btn-block btn-primary"><i class="fas fa-search mr-3"></i>Verify result</a>
+      </div>
+      <di class="col-md-9">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+          <div class="col-md-6">
+            <div class="card card-primary card-outline">
+              {% include 'dashboard/teacher/partials/head_info.html' %}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h2 class="card-title">Result Info</h2>
+              </div>
+              <div class="card-body">
+                <div class="list-group">
+                  <div class="list-group-item">
+                    <h4>Course</h4>
+                    <p class="mb-1">{{ result.course }}</p>
+                  </div>
+                  <div class="list-group-item">
+                    <h4>Batch</h4>
+                    <p class="mb-1">{{ result.batch }}</p>
+                  </div>
+                </div>
+                  {% include 'result/partials/result_info.html' %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h3 class="carf-title">Address Info</h3>
+              </div>
+              <div class="card-body">
+               {% include 'dashboard/teacher/partials/profile_info.html' %}
+              </div>
+            </div>
+          </div>
+      </div>
+    </di>
+  </div>
+  </div>
+{% endblock content %}

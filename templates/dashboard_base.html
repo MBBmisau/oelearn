@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+   {% block title %}
+   {% endblock %}
+  </title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}" >
+    <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+
+  {% block extra-stylesheet %}
+  {% endblock %}
+
+    <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+ {% block nav-bar %}
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'custom_auth:home' %}" class="nav-link">Home</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+ {% endblock %}
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+ {% block main-sidebar %}
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="" class="brand-link">
+      <span class="brand-text font-weight-light">OELearn</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+     {% if user.is_authenticated %}
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+         {% if user.is_student %}
+          {% if user.student.passport %}
+           <img src="{{ user.student.passport.url }}" class="img-circle elevation-2" alt="User Image">
+          {% endif %}
+         {% elif user.is_teacher %}
+          {% if user.teacher.passport %}
+           <img src="{{ user.teacher.passport.url }}" class="img-circle elevation-2" alt="User Image">
+          {% endif %}
+         {% endif %}
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ user.get_short_name }}</a>
+        </div>
+      </div>
+     {% endif %}
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          {% block main-sidebar-content %}
+
+          {% endblock %}
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+ {% endblock %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+          <h1 class="m-0">
+             {% block content-header %}
+             {% endblock %}
+            </h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    {% block messages %}
+     {% if messages %}
+      {% for message in messages %}
+      <div class="alert {% if message.tags == 'error' %} alert-danger {% else %} alert-{{message.tags}} {% endif %} alert-dismissible">
+      <button class="close" data-dismiss="alert" type="button">&times;
+            </button>
+       <p><strong>{{message.tags}}! </strong> {{ message}} </p>
+      </div>
+     {% endfor %}
+    {% endif %}
+   {% endblock %}
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+       {% block content %}
+       {% endblock %}
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+ {% block control-sidebar %}
+
+ {% endblock %}
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+ {% block footer %}
+  
+ {% endblock %}
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+</body>
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+{% block extra-javascript %}
+{% endblock %}
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+{% block written_script %}
+{% endblock %}
+</html>

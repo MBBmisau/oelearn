@@ -1,0 +1,63 @@
+{% extends 'teacher_base.html' %}
+
+{% load django_tables2 %}
+
+{% block title %}
+ {% if ca %}
+  Module CA Results | {{ ca }}
+ {% elif exam %}
+  Course Exam Results | {{ exam }}
+ {% endif %}
+{% endblock title %}
+
+{% block content %}
+ <div class="row">
+   {% if parent_url %}
+   <div class="col-12">
+     <a class="btn btn-outline-primary mb-2 btn-lg" href="{{ parent_url }}">
+       <i class="fas fa-angle-double-left"></i>
+     </a>
+   </div>
+   {% endif %}
+    <div class="col-md-3">
+      <div class="card card-primary card-outline">
+      <div class="card-header">
+        <h2 class="card-title">{{ marked_count }} out of {{ all_count }} {% if ca %} CA {% elif exam %} Exam {% endif %} results are marked</h2>
+      </div>
+      <div card-body>
+        <table class="table">
+         <tr>
+            <th>Course</th>
+            <td>{{ course }}</td>
+         </tr>
+         {% if module %}
+         <tr>
+          <th>Module</th>
+          <td>{{ module }}</td>
+         </tr>
+         {% endif %}
+         {% if ca %}
+         <tr>
+          <th>CA</th>
+          <td>{{ca }}</td>
+         </tr>
+         {% endif %}
+         {% if exam %}
+         <tr>
+          <th>CA</th>
+          <td>{{ exam }}</td>
+         </tr>
+         {% endif %}
+         <tr>
+            <th>Batch</th>
+            <td>{{batch }}</td>
+         </tr>
+        </table>
+      </div>
+    </div>
+   </div>
+    <div class="col-md-9">
+      {% render_table table %}
+    </div>
+ </div>
+{% endblock content %}

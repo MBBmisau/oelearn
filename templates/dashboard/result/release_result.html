@@ -1,0 +1,46 @@
+{% extends 'teacher_base.html' %}
+
+{% block title %}
+  Release result | Current samester
+{% endblock title %}
+
+{% block content %}
+  <div class="card card-primary card-outline" style="max-width: 550px;margin:auto;">
+    <div class="card-header">
+      <h2 class="card-title">{{ batch }} result is about to be released.</h2>
+    </div>
+    <div class="card-body">
+      <h5 class="card-subtitle">Result release is always accompanied with several changes 
+        and restrictions that may not be reversed easiy. Please! Put the following informations 
+        into consideration before releasing the batch result.</h5>
+      <div class="list-group">
+        <div href="#" class="list-group-item">
+          <h5>After release, Exams and assessment for this batch with no longer be accessible or considered</h5>
+          <p class="mb-1">If there is any assessment or exam that is expected to be taken. Wait!</p>
+        </div>
+        <div class="list-group-item">
+            <h5>Admin or instructor can neither mark nor modify any result</h5>
+            <p class="mb-1">If there is any modification or marking, do it before release</p>
+        </div>
+        <div class="list-group-item">
+            <h5>Result for this batch will be generated, released and be accessible to all students even after if this batch is over</h5>
+            <p class="mb-1">It is after release that students can access their result</p>
+        </div>
+        <div class="list-group-item">
+            <h5>Only Exams and Assessments that are currently published under course that are currently live will be considered</h5>
+            <p class="mb-1">If there is courses, exams, or assessments that you want to be included, just unpublish the</p>
+        </div>
+        <div class="list-group-item">
+            <h5>The result GENERATOR is programmed to generate result by aggregating previously submitted 
+                exams and assessments to 70 marks and 30 marks respectively.
+            </h5>
+            <p class="mb-1"></p>
+        </div>
+      </div>
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Release result" class="btn btn-success btn-lg btn-block">
+      </form>
+    </div>
+  </div>
+{% endblock content %}

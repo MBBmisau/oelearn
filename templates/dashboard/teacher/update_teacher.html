@@ -1,0 +1,68 @@
+{% extends 'teacher_base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+Teacher | Edit
+{% endblock %}
+
+{% block extra-stylesheet %}
+ {{ user.form.media.css }}
+ {{ teacher_form.media.css }}
+{% endblock %}
+
+{% block content %}
+
+ <div class="container">
+  <div class="row">
+      
+      <div class="col-12">
+     <a class="btn btn-outline-primary mb-2 btn-lg" href="{% url 'teacher_dashboard:dashboard' %}">
+       <i class="fas fa-angle-double-left"></i>
+     </a>
+   </div>
+   
+  <div class="col-sm-6">
+  <div class="card">
+  <div class="card-header">
+    <h4 class="head-title"><b>Email address:</b> {{ teacher.user.email }}</h4>
+  </div>
+  <form action="" enctype="multipart/form-data" method="post">
+   <div class="card-body">
+   {% csrf_token %}
+
+   {% bootstrap_form user_form %}
+   </div>
+   <div class="card-footer">
+   {% buttons %}
+    <input class="btn btn-primary btn-block mb-2" type="submit" name="save" id="save" value="Save" />
+   {% endbuttons %}
+   </div>
+  </form>
+  </div>
+  </div>
+  <div class="col-sm-6">
+  <div class="card">
+  <form action="" enctype="multipart/form-data" method="post">
+   {% csrf_token %}
+   <div class="card-body">
+   {% bootstrap_form teacher_form %}
+   </div>
+   <div class="card-footer">
+   {% buttons %}
+    <input class="btn btn-primary btn-block mb-2" type="submit" name="save" id="save" value="Save" />
+   {% endbuttons %}
+   </div>
+  </form>
+ </div>
+ </div>
+ </div>
+ </div>
+{% endblock %}
+
+{% block extra-javascript %}
+
+ {{ user_form.media.js }}
+ {{ teacher_form.media.js }}
+
+ {% endblock %}
